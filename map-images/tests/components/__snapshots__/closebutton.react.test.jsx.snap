@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CloseButton/> should render with long and lat props 1`] = `
+<styled.div>
+  exit ✕
+</styled.div>
+`;
+
+exports[`<CloseButton/> should render without props 1`] = `
+<styled.div>
+  exit ✕
+</styled.div>
+`;

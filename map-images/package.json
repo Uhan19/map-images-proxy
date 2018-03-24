@@ -1,0 +1,75 @@
+{
+  "name": "maps-and-image-carousel-service",
+  "version": "1.3.2",
+  "description": "Maps and Image Carousel Service",
+  "main": "server/server.js",
+  "repository": "https://github.com/codenamesgroup/Maps-and-Image-Carousel-Service.git",
+  "author": "fermi_dirac <ManueleBryan@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "nodemon bin/init",
+    "webpack": "webpack -d --watch",
+    "test": "jest --watch",
+    "test:quick": "jest",
+    "test:coverage": "jest --coverage",
+    "docker": "webpack -d; node bin/init"
+  },
+  "jest": {
+    "setupFiles": [
+      "./tests/jestSetup.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  },
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-jest": "^22.4.1",
+    "babel-loader": "^7.1.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "dotenv": "^5.0.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.1",
+    "jest": "^22.4.2",
+    "nodemon": "^1.15.1",
+    "react-test-renderer": "^16.2.0",
+    "webpack": "^4.1.0",
+    "webpack-cli": "^2.0.10"
+  },
+  "dependencies": {
+    "Faker": "^0.7.2",
+    "JSONStream": "^1.3.2",
+    "apollo-server-express": "^1.3.2",
+    "axios": "^0.18.0",
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "event-stream": "^3.3.4",
+    "express": "^4.16.2",
+    "express-graphql": "^0.6.12",
+    "faker": "^4.1.0",
+    "graphql": "^0.13.1",
+    "graphql-tools": "^2.21.0",
+    "mongoose": "^5.0.8",
+    "mongoose-unique-validator": "^2.0.0",
+    "mysql2": "^1.5.2",
+    "ndjson": "^1.5.0",
+    "newrelic": "^3.2.0",
+    "npm": "^5.7.1",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-icons": "^2.2.7",
+    "reactcss": "^1.2.3",
+    "redis": "^2.8.0",
+    "redis-server": "^1.2.0",
+    "request": "^2.81.0",
+    "sequelize": "^4.33.4",
+    "styled-components": "^3.2.1"
+  }
+}

@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BusinessInfo/> should render with empty business object 1`] = `
+<styled.div>
+  <Map
+    latitude={0}
+    longitude={0}
+  />
+  <styled.div>
+    <FaMapMarker
+      style={
+        Object {
+          "color": "darkgray",
+          "height": "18px",
+          "margin": "4px auto",
+          "width": "18px",
+        }
+      }
+    />
+    <div>
+      <styled.p>
+        undefined
+      </styled.p>
+      <styled.p>
+        undefined, undefined undefined
+      </styled.p>
+    </div>
+    <FaMapSigns
+      style={
+        Object {
+          "color": "darkgray",
+          "height": "18px",
+          "margin": "4px auto",
+          "width": "18px",
+        }
+      }
+    />
+    <styled.p>
+      Get Directions
+    </styled.p>
+    <FaPhone
+      style={
+        Object {
+          "color": "darkgray",
+          "height": "18px",
+          "margin": "4px auto",
+          "width": "18px",
+        }
+      }
+    />
+    <styled.p>
+      (545) 523-7964
+    </styled.p>
+    <FaExternalLink
+      style={
+        Object {
+          "color": "darkgray",
+          "height": "18px",
+          "margin": "4px auto",
+          "width": "18px",
+        }
+      }
+    />
+    <styled.p>
+      undefined.com
+    </styled.p>
+    <FaMobile
+      style={
+        Object {
+          "color": "darkgray",
+          "height": "18px",
+          "margin": "4px auto",
+          "width": "18px",
+        }
+      }
+    />
+    <styled.p>
+      Send to your phone
+    </styled.p>
+  </styled.div>
+</styled.div>
+`;

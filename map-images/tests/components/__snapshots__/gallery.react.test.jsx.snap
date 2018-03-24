@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Gallery/> should render 1`] = `
+<styled.div>
+  <styled.div>
+    <styled.span>
+      <CloseButton />
+    </styled.span>
+    <styled.div>
+      <styled.div>
+        <styled.div
+          onClick={[Function]}
+        >
+          <styled.div>
+             ❮ 
+          </styled.div>
+        </styled.div>
+        <styled.div
+          onClick={[Function]}
+        >
+          <styled.div>
+             ❯ 
+          </styled.div>
+        </styled.div>
+        <styled.div>
+          1 of 1
+        </styled.div>
+        <styled.img
+          src="https://s3-media4.fl.yelpcdn.com/bphoto/id/o.jpg"
+        />
+      </styled.div>
+      <styled.div>
+        <styled.div>
+          <styled.div>
+            <styled.p>
+              business name
+            </styled.p>
+            <styled.p>
+              From the business owner
+            </styled.p>
+          </styled.div>
+        </styled.div>
+        <styled.div>
+          <styled.p>
+            no caption
+          </styled.p>
+          <styled.p>
+             March 10, 2010 
+          </styled.p>
+        </styled.div>
+      </styled.div>
+    </styled.div>
+  </styled.div>
+</styled.div>
+`;

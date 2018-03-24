@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CarouselImage/> should render 1`] = `
+<styled.div
+  enlarged={false}
+>
+  <styled.img
+    enlarged={false}
+  />
+  <styled.div
+    show={false}
+  >
+    <styled.img />
+    <styled.div>
+      <styled.div>
+        by 
+        Anonymous
+      </styled.div>
+    </styled.div>
+  </styled.div>
+</styled.div>
+`;

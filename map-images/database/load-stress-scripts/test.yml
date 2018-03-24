@@ -1,0 +1,67 @@
+config:
+  # environments: 
+  #   staging: 
+    target: 'http://54.183.5.244:3001/map-and-images/business'
+    phases: 
+      - duration: 60
+        arrivalRate: 10
+        rampTo: 30
+        name: "ramp up"
+      - duration: 120
+        arrivalRate: 30
+        name: "sustained max load"
+    defaults:
+      headers:
+        x-my-service-auth: '987401838271002188298567'
+    processor: './randomizer.js'
+scenarios:
+  - name: "brunch"
+    weight: 15
+    flow:
+    - loop:
+      - get:
+          url: "/1"
+      # - get: 
+      #     url: "/{{ url }}/photos"
+      count: 25
+    # - log: "everyone has a fav brunch place right??"
+  - name: "lunch"
+    weight: 15
+    flow: 
+    - loop:
+      - function: "generate10Data"
+      - get:
+          url: "/{{ url }}"
+      count: 25
+    # - log: "#toolazy4mealprep"
+  - name: "dinner"
+    weight: 15
+    flow:
+    - loop: 
+      - function: "generate100Data"
+      - get: 
+          url: "/{{ url }}"
+      count: 25
+    # - log: "wine'd, dine'd & #'d'"
+  - name: "anytime"
+    weight: 55
+    flow: 
+    - loop: 
+      - function: "generateRandomData"
+      - get: 
+          url: "/{{ url }}"
+      count: 25
+    # - log: "I'm hungry"
+
+#-------------------------------README----------------------------------#
+# Multiple environments are set up: 
+#   - staging 
+
+#   **Choose an environment on the command line with the '-e' flag**
+#   ex: artillery run -e staging test.yml
+
+# Phases implemented: 
+#   ramp up: 60 seconds from 10 to 30 arrivalRate
+
+# Scenarios implemented: 
+
