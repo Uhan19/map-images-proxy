@@ -1,28 +1,42 @@
 config:
-  # environments: 
-  #   staging: 
-    target: 'http://54.183.5.244:3001/map-and-images/business'
-    phases: 
-      - duration: 60
-        arrivalRate: 10
-        rampTo: 30
-        name: "ramp up"
-      - duration: 120
-        arrivalRate: 30
-        name: "sustained max load"
-    defaults:
-      headers:
-        x-my-service-auth: '987401838271002188298567'
-    processor: './randomizer.js'
+  environments: 
+    proxy: 
+      target: 'http://localhost:3000'
+      phases: 
+        - duration: 5
+          arrivalRate: 10
+          rampTo: 10
+          name: "ramp up"
+        - duration: 10
+          arrivalRate: 30
+          name: "sustained max load"
+      defaults:
+        headers:
+          x-my-service-auth: '987401838271002188298567'
+      processor: './randomizer.js'
+    staging: 
+      target: 'http://54.183.5.244:3001/map-and-images/business'
+      phases: 
+        - duration: 60
+          arrivalRate: 10
+          rampTo: 30
+          name: "ramp up"
+        - duration: 120
+          arrivalRate: 30
+          name: "sustained max load"
+      defaults:
+        headers:
+          x-my-service-auth: '987401838271002188298567'
+      processor: './randomizer.js'
 scenarios:
   - name: "brunch"
     weight: 15
     flow:
     - loop:
       - get:
-          url: "/1"
+          url: "/map-and-images/business/1"
       # - get: 
-      #     url: "/{{ url }}/photos"
+      #     url: "/map-and-images/business/1/photos"
       count: 25
     # - log: "everyone has a fav brunch place right??"
   - name: "lunch"
@@ -31,7 +45,9 @@ scenarios:
     - loop:
       - function: "generate10Data"
       - get:
-          url: "/{{ url }}"
+          url: "/map-and-images/business/{{ url }}"
+      # - get: 
+      #     url: "/map-and-images/business/{{ url }}/photos"
       count: 25
     # - log: "#toolazy4mealprep"
   - name: "dinner"
@@ -40,7 +56,9 @@ scenarios:
     - loop: 
       - function: "generate100Data"
       - get: 
-          url: "/{{ url }}"
+          url: "/map-and-images/business/{{ url }}"
+      # - get: 
+      #     url: "/map-and-images/business/{{ url }}/photos"
       count: 25
     # - log: "wine'd, dine'd & #'d'"
   - name: "anytime"
@@ -49,7 +67,9 @@ scenarios:
     - loop: 
       - function: "generateRandomData"
       - get: 
-          url: "/{{ url }}"
+          url: "/map-and-images/business/{{ url }}"
+      # - get: 
+      #     url: "/map-and-images/business/{{ url }}/photos"
       count: 25
     # - log: "I'm hungry"
 
