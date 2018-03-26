@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import { MapAndImages } from './components/App.jsx';
+import { MapAndImages } from "./components/App.jsx";
 
-ReactDOM.render(<MapAndImages/>, document.getElementById('MapAndImages'));
+ReactDOM.render(<MapAndImages />, document.getElementById("MapAndImages"));
