@@ -3,13 +3,13 @@ config:
     proxy: 
       target: 'http://localhost:3000'
       phases: 
-        - duration: 5
-          arrivalRate: 10
-          rampTo: 10
-          name: "ramp up"
         - duration: 10
+          arrivalRate: 10
+          rampTo: 30
+          name: "ramp up"
+        - duration: 90
           arrivalRate: 30
-          name: "sustained max load"
+          name: "maximum effort!"
       defaults:
         headers:
           x-my-service-auth: '987401838271002188298567'

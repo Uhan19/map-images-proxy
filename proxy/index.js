@@ -18,5 +18,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(port, () => {
-  console.log(`server running at: http://localhost:${port}`);
+  console.log(`server running at: http://54.193.45.206:${port}`);
 });
