@@ -1,5 +1,19 @@
 config:
   environments: 
+    proxy-aws: 
+      target: 'http://54.193.45.206:3000'
+      phases:
+        - duration: 10
+          arrivalRate: 10
+          rampTo: 30
+          name: "ramp up"
+        - duration: 90
+          arrivalRate: 30
+          name: "maximum effort!"
+      defaults:
+        headers:
+          x-my-service-auth: '987401838271002188298567'
+      processor: './randomizer.js'
     proxy: 
       target: 'http://localhost:3000'
       phases: 
