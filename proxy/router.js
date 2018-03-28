@@ -32,18 +32,38 @@ function cachePhoto(req, res, next) {
   });
 }
 
-// router.get("/map-and-images/business/:id", (req, res) => {
-//   // request(`http://localhost:3001/map-and-images/business/${req.params.id}`)
-//   request(`http://54.183.5.244:3001/map-and-images/business/${req.params.id}`)
-//     .on("error", err => {
-//       console.log(err);
-//     })
-//     .pipe(res);
-// });
+const clientBundles = "./public/services";
+const serverBundles = "./templates/services";
+const serviceConfig = require("./service-config.json");
+const services = require("./loader.js")(
+  clientBundles,
+  serverBundles,
+  serviceConfig
+);
+
+const React = require("react");
+const ReactDom = require("react-dom/server");
+const Html = require("./templates/html");
+const App = require("./templates/app");
+const Scripts = require("./templates/scripts");
+
+const renderComponents = (components, props = {}) => {
+  return Object.keys(components).map(item => {
+    let component = React.createElement(components[item], props);
+    return ReactDom.renderToString(component);
+  });
+};
+
+router.get("/:id", function(req, res) {
+  let components = renderComponents(services, { itemid: req.params.id });
+  res.end(
+    Html("Chompy Proxy", App(...components), Scripts(Object.keys(services)))
+  );
+});
 
 router.get("/map-and-images/business/:id", cacheBusiness, function(req, res) {
   axios
-    .get(`http://54.183.5.244:3001/map-and-images/business/${req.params.id}`)
+    .get(`http://localhost:3001/map-and-images/business/${req.params.id}`) //before deployment change this to 54.183.5.244:3001
     .then(results => {
       client.setex(req.params.id, 3600, JSON.stringify(results.data));
       res.send(results.data);
@@ -55,26 +75,13 @@ router.get("/map-and-images/business/:id", cacheBusiness, function(req, res) {
     });
 });
 
-// router.get("/map-and-images/business/:id/photos", (req, res) => {
-//   // request(
-//   //   `http://localhost:3001/map-and-images/business/${req.params.id}/photos`
-//   // )
-//   request(
-//     `http://54.183.5.244:3001/map-and-images/business/${req.params.id}/photos`
-//   )
-//     .on("error", err => {
-//       console.log(err);
-//     })
-//     .pipe(res);
-// });
-
 router.get("/map-and-images/business/:id/photos", cachePhoto, function(
   req,
   res
 ) {
   axios
     .get(
-      `http://54.183.5.244:3001/map-and-images/business/${req.params.id}/photos`
+      `http://localhost:3001/map-and-images/business/${req.params.id}/photos`
     )
     .then(results => {
       var key = JSON.stringify(req.params.id + 1);
