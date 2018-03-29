@@ -8,7 +8,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json()); //might not need this, check the speed difference.
 
 app.use("/", router);
 
