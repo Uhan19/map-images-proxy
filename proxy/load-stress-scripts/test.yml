@@ -1,0 +1,99 @@
+config:
+  environments: 
+    proxy-aws: 
+      target: 'http://54.153.43.65:3000'
+      http: 
+        pool: 10
+      phases:
+        - duration: 10
+          arrivalRate: 1
+          rampTo: 20
+          name: "ramp up"
+        - duration: 30
+          arrivalRate: 20
+          name: "maximum effort!"
+      defaults:
+        headers:
+          x-my-service-auth: '987401838271002188298567'
+      processor: './randomizer.js'
+    proxy: 
+      target: 'http://localhost:3000'
+      phases: 
+        - duration: 10
+          arrivalRate: 10
+          rampTo: 30
+          name: "ramp up"
+        - duration: 90
+          arrivalRate: 30
+          name: "maximum effort!"
+      defaults:
+        headers:
+          x-my-service-auth: '987401838271002188298567'
+      processor: './randomizer.js'
+    staging: 
+      target: 'http://54.183.5.244:3001
+      phases: 
+        - duration: 60
+          arrivalRate: 10
+          rampTo: 30
+          name: "ramp up"
+        - duration: 120
+          arrivalRate: 30
+          name: "sustained max load"
+      defaults:
+        headers:
+          x-my-service-auth: '987401838271002188298567'
+      processor: './randomizer.js'
+scenarios:
+  - name: "brunch"
+    weight: 15
+    flow:
+    - loop:
+      - get:
+          url: "/map-and-images/business/1"
+      - get: 
+          url: "/map-and-images/business/1/photos"
+      count: 150
+  - name: "lunch"
+    weight: 15
+    flow: 
+    - loop:
+      - function: "generate10Data"
+      - get:
+          url: "/map-and-images/business/{{ url }}"
+      - get: 
+          url: "/map-and-images/business/{{ url }}/photos"
+      count: 150
+  - name: "dinner"
+    weight: 15
+    flow:
+    - loop: 
+      - function: "generate100Data"
+      - get: 
+          url: "/map-and-images/business/{{ url }}"
+      - get: 
+          url: "/map-and-images/business/{{ url }}/photos"
+      count: 150
+  - name: "anytime"
+    weight: 55
+    flow: 
+    - loop: 
+      - function: "generateRandomData"
+      - get: 
+          url: "/map-and-images/business/{{ url }}"
+      - get: 
+          url: "/map-and-images/business/{{ url }}/photos"
+      count: 150
+
+#-------------------------------README----------------------------------#
+# Multiple environments are set up: 
+#   - proxy-aws
+#   - proxy 
+#   - staging 
+
+#   **Choose an environment on the command line with the '-e' flag**
+#   ex: artillery run -e staging test.yml
+
+# Phases implemented: 
+#   ramp up: 60 seconds from 10 to 30 arrivalRate
+
