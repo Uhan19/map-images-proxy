@@ -63,7 +63,7 @@ router.get("/:id", function(req, res) {
 
 router.get("/map-and-images/business/:id", cacheBusiness, function(req, res) {
   axios
-    .get(`http://54.183.5.244:3001/map-and-images/business/${req.params.id}`) //before deployment change this to 54.183.5.244:3001
+    .get(`http://54.183.5.244:3001/map-and-images/business/${req.params.id}`)
     .then(results => {
       client.setex(req.params.id, 3600, JSON.stringify(results.data));
       res.send(results.data);

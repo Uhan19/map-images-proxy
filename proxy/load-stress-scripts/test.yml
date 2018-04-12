@@ -1,14 +1,16 @@
 config:
   environments: 
     proxy-aws: 
-      target: 'http://54.193.45.206:3000'
+      target: 'http://54.153.43.65:3000'
+      http: 
+        pool: 10
       phases:
         - duration: 10
-          arrivalRate: 10
-          rampTo: 30
+          arrivalRate: 1
+          rampTo: 20
           name: "ramp up"
-        - duration: 90
-          arrivalRate: 30
+        - duration: 30
+          arrivalRate: 20
           name: "maximum effort!"
       defaults:
         headers:
@@ -29,7 +31,7 @@ config:
           x-my-service-auth: '987401838271002188298567'
       processor: './randomizer.js'
     staging: 
-      target: 'http://54.183.5.244:3001/map-and-images/business'
+      target: 'http://54.183.5.244:3001
       phases: 
         - duration: 60
           arrivalRate: 10
@@ -49,10 +51,9 @@ scenarios:
     - loop:
       - get:
           url: "/map-and-images/business/1"
-      # - get: 
-      #     url: "/map-and-images/business/1/photos"
-      count: 25
-    # - log: "everyone has a fav brunch place right??"
+      - get: 
+          url: "/map-and-images/business/1/photos"
+      count: 150
   - name: "lunch"
     weight: 15
     flow: 
@@ -60,10 +61,9 @@ scenarios:
       - function: "generate10Data"
       - get:
           url: "/map-and-images/business/{{ url }}"
-      # - get: 
-      #     url: "/map-and-images/business/{{ url }}/photos"
-      count: 25
-    # - log: "#toolazy4mealprep"
+      - get: 
+          url: "/map-and-images/business/{{ url }}/photos"
+      count: 150
   - name: "dinner"
     weight: 15
     flow:
@@ -71,10 +71,9 @@ scenarios:
       - function: "generate100Data"
       - get: 
           url: "/map-and-images/business/{{ url }}"
-      # - get: 
-      #     url: "/map-and-images/business/{{ url }}/photos"
-      count: 25
-    # - log: "wine'd, dine'd & #'d'"
+      - get: 
+          url: "/map-and-images/business/{{ url }}/photos"
+      count: 150
   - name: "anytime"
     weight: 55
     flow: 
@@ -82,10 +81,9 @@ scenarios:
       - function: "generateRandomData"
       - get: 
           url: "/map-and-images/business/{{ url }}"
-      # - get: 
-      #     url: "/map-and-images/business/{{ url }}/photos"
-      count: 25
-    # - log: "I'm hungry"
+      - get: 
+          url: "/map-and-images/business/{{ url }}/photos"
+      count: 150
 
 #-------------------------------README----------------------------------#
 # Multiple environments are set up: 
@@ -98,6 +96,4 @@ scenarios:
 
 # Phases implemented: 
 #   ramp up: 60 seconds from 10 to 30 arrivalRate
-
-# Scenarios implemented: 
 
